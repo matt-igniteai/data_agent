@@ -1,0 +1,13 @@
+[project]
+name = "ignite-sql-mcp-server"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "anthropic>=0.54.0",
+    "mcp>=1.9.4",
+    "nest-asyncio>=1.6.0",
+    "openai>=1.88.0",
+    "pyodbc>=5.2.0",
+]
