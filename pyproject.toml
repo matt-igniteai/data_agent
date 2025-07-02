@@ -9,5 +9,7 @@ dependencies = [
     "mcp>=1.9.4",
     "nest-asyncio>=1.6.0",
     "openai>=1.88.0",
+    "pandas>=2.3.0",
+    "plotly>=6.2.0",
     "pyodbc>=5.2.0",
 ]
