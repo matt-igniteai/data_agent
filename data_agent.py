@@ -44,7 +44,6 @@ class MCP_ChatBot:
         self.tool_to_session: Dict[str, ClientSession] = {} # new - all the tools from particular sessions
         """This class is not production ready but the focus here is to make sure that we correctly map a tool."""
 
-
     async def connect_to_server(self, server_name: str, server_config: dict) -> None:
         """Connect to a single MCP server."""
         logger.info(f"Attempting to connect to server: {server_name}") # ----- NEW
@@ -143,8 +142,6 @@ class MCP_ChatBot:
                     if(len(response.content) == 1 and response.content[0].type == "text"):
                         print(response.content[0].text)
                         process_query= False
-
-    
     
     async def chat_loop(self):
         """Run an interactive chat loop"""
