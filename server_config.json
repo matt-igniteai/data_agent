@@ -4,7 +4,15 @@
             "command": "uv",
             "args": [
                 "run",
-                "mcp_server.py"
+                "mcp_sql.py"
+            ]
+        },
+
+        "ignite_viz_mcp": {
+            "command": "uv",
+            "args": [
+                "run",
+                "mcp_visualisation.py"
             ]
         },
         "filesystem": {
