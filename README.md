@@ -4,10 +4,11 @@ A Natural Language to SQL (NL2SQL) project that uses Model Context Protocol (MCP
 
 ## Project Overview
 
-This project consists of two main components:
+This project consists of three main components:
 
-1. **MCP Server** (`mcp_server.py`) - Provides database connectivity and SQL execution tools
-2. **MCP Chatbot Client** (`mcp_chatbot.py`) - Interactive chatbot that processes natural language queries
+1. **SQL Server MCP** (`mcp_sql.py`) - Provides database connectivity and SQL execution tools
+2. **Visualisation MCP Server** (`mcp_visualisation.py`) - Provides tools to create interactive data visualisations
+3. **MCP Chatbot** (`data_agent.py`) - Interactive chatbot that processes natural language queries
 
 The system allows users to ask questions in natural language about their database, which are then converted to SQL queries and executed against a Microsoft SQL Server database.
 
@@ -17,6 +18,7 @@ The system allows users to ask questions in natural language about their databas
 - **Schema Exploration** - List tables and inspect table schemas
 - **Natural Language Queries** - Convert plain English to SQL using Claude AI
 - **Safe Query Execution** - Read-only SELECT queries with result limiting
+- **Interactive Data Visualisation** - Generate interactive charts via the Visualisation MCP server
 - **Multi-Server Support** - Connect to multiple MCP servers simultaneously
 
 ## Prerequisites
@@ -61,18 +63,17 @@ ANTHROPIC_API_KEY=your-anthropic-api-key
 
 The `server_config.json` file defines MCP server connections. The default configuration includes:
 
-- `ignite_sql_server_mcp` - The SQL Server MCP server
-- `filesystem` - File system operations
-- `fetch` - Web content fetching
+- `ignite_sql_server_mcp` - SQL Server MCP server (runs `mcp_sql.py`)
+- `ignite_viz_mcp` - Data Visualisation MCP server (runs `mcp_visualisation.py`)
 
 ## Usage
 
 ### Running the MCP Chatbot
 
-To start the interactive chatbot with UV package management:
+To start the interactive chatbot:
 
 ```bash
-uv run mcp_chatbot.py
+uv run data_agent.py
 ```
 
 This will:
@@ -91,11 +92,17 @@ Once the chatbot is running, you can ask questions like:
 
 Type `quit` to exit the chatbot.
 
+
 ### Running Individual Components
 
-**MCP Server only:**
+**SQL Server MCP only:**
 ```bash
-uv run mcp_server.py
+uv run mcp_sql.py
+```
+
+**Visualisation MCP server only:**
+```bash
+uv run mcp_visualisation.py
 ```
 
 **Testing database connection:**
@@ -112,7 +119,7 @@ npm install -g @modelcontextprotocol/inspector
 
 2. Run the inspector with your MCP server:
 ```bash
-mcp-inspector uv run mcp_server.py
+mcp-inspector uv run mcp_sql.py
 ```
 
 3. Open your browser to the provided URL to interact with the MCP server through the web interface.
@@ -125,12 +132,18 @@ The inspector allows you to:
 
 ## Available MCP Tools
 
+### SQL Server MCP Tools
+
 The SQL Server MCP provides these tools:
 
 - **connect_to_database** - Test database connectivity
 - **list_tables** - Get all table names
 - **get_table_schema** - Inspect table structure
 - **execute_sql_query** - Run SELECT queries (read-only)
+
+### Visualisation MCP Tools
+
+- **generate_chart** - Generate interactive Plotly charts based on structured requests
 
 ## Security Features
 
