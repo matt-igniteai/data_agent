@@ -184,14 +184,17 @@ class MCP_ChatBot:
 
 async def main():
     chatbot = MCP_ChatBot()
-    try:
-        # the mcp clients and sessions are not initialized using "with"
-        # like in the previous lesson
-        # so the cleanup should be manually handled
-        await chatbot.connect_to_servers() # new! 
-        await chatbot.chat_loop()
-    finally:
-        await chatbot.cleanup() #new! 
+    await chatbot.connect_to_servers()
+
+    
+    # try:
+    #     # the mcp clients and sessions are not initialized using "with"
+    #     # like in the previous lesson
+    #     # so the cleanup should be manually handled
+    #     await chatbot.connect_to_servers() # new! 
+    #     await chatbot.chat_loop()
+    # finally:
+    #     await chatbot.cleanup() #new! 
 
 
 if __name__ == "__main__":
