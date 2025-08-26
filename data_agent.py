@@ -155,46 +155,51 @@ class MCP_ChatBot:
                     
                     #  this code checks if the new response is a final, simple text answer.
                     if(len(response.content) == 1 and response.content[0].type == "text"):
-                        print(f"\n---Final Answer---\n{response.content[0].text}")
+                        # print(f"\n---Final Answer---\n{response.content[0].text}")
+                        
                         process_query= False
         
-    
-    # async def chat_loop(self):
-    #     """Run an interactive chat loop"""
-    #     print("\nMCP Chatbot Started!")
-    #     print("Type your queries or 'quit' to exit.")
+        return f"\n---Final Answer---\n{response.content[0].text}"
         
-    #     while True:
-    #         try:
-    #             query = input("\nQuery: ").strip()
-        
-    #             if query.lower() == 'quit':
-    #                 break
-                    
-    #             await self.process_query(query)
-    #             print("\n")
-                    
-    #         except Exception as e:
-    #             print(f"\nError: {str(e)}")
     
-    # async def cleanup(self): # new
-    #     """Cleanly close all resources using AsyncExitStack."""
-    #     await self.exit_stack.aclose()
+    async def chat_loop(self):
+        """Run an interactive chat loop"""
+        print("\nMCP Chatbot Started!")
+        print("Type your queries or 'quit' to exit.")
+        
+        while True:
+            try:
+                query = input("\nQuery: ").strip()
+        
+                if query.lower() == 'quit':
+                    break
+                    
+                # await self.process_query(query)
+                res = await self.process_query(query)
+                print(f"\n {res} \n")
+                    
+            except Exception as e:
+                print(f"\nError: {str(e)}")
+    
+    async def cleanup(self): # new
+        """Cleanly close all resources using AsyncExitStack."""
+        await self.exit_stack.aclose()
 
 
 async def main():
     chatbot = MCP_ChatBot()
-    await chatbot.connect_to_servers()
+    # await chatbot.connect_to_servers()
 
-    
-    # try:
-    #     # the mcp clients and sessions are not initialized using "with"
-    #     # like in the previous lesson
-    #     # so the cleanup should be manually handled
-    #     await chatbot.connect_to_servers() # new! 
-    #     await chatbot.chat_loop()
-    # finally:
-    #     await chatbot.cleanup() #new! 
+
+    try:
+        # the mcp clients and sessions are not initialized using "with"
+        # so the cleanup should be manually handled
+        await chatbot.connect_to_servers() # new! 
+        await chatbot.chat_loop()
+    finally:
+        await chatbot.cleanup() #new!
+        print("\n Exiting the chatbot. \n") 
+        
 
 
 if __name__ == "__main__":
