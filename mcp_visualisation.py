@@ -61,7 +61,7 @@ class ChartRequest(BaseModel):
 
 
 @mcp.tool()
-async def generate_chart(request: ChartRequest) -> str:
+async def create_chart(request: ChartRequest) -> str:
     """
     Generates an interactive chart based on the provided data and specifications.
 
